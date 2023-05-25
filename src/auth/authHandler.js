@@ -20,18 +20,20 @@ async function postRegister(email, password) {
      }
 }
 
-async function getLogin(email, password) {
+async function getLogin(email) {
      try {
-          axios.get(`${baseUrl}/auth/register`)
-             .then(function (response) {
-               console.log(response);
+          return axios.get(`${baseUrl}/auth/login/${email}`)
+             .then((response) => {
+               return response.data;
              })
              .catch(function (error) {
                console.log(error);
+               return "error";
              });
      } catch(e) {
           console.error('Failure!');
           console.error(e.response.status);
+          return("error");
      }
 }
 

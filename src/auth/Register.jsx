@@ -9,12 +9,12 @@ function Register() {
 
      useEffect(() => {
           document.title = "Бүртгэл үүсгэх";
-        }, []);
+     }, []);
 
      const register = (e) => {
           e.preventDefault();
           postRegister(email, password).then(() => {
-               window.location = 'http://localhost:3000/auth/login';
+               window.location = 'http://localhost:3000/home';
           });
      }
 

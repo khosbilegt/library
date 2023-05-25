@@ -21,8 +21,13 @@ app.get('/', (req, res) => {
   res.send('Hello World!')
 })
 
-app.get('/auth/login', (req, res) => {
-     console.log("Received");
+app.get('/auth/login/:email', (req, res) => {
+     var parsedEmail = parseEmail(req.params.email);
+     fs.readFile(`/Users/xocoo/Desktop/Projects/library/admin/res/users/${parsedEmail}.json`, 'utf8', function(err, data){
+          res.send(data);
+     });
+     
+     //res.send(content);
 })
 
 app.post('/auth/register', jsonParser, (req, res) => {
@@ -34,9 +39,8 @@ app.post('/auth/register', jsonParser, (req, res) => {
           if (err) {
             console.error(err);
           }
-        });
+     });
 
-     res.send("Test")
 })
 
 app.listen(port, () => {
