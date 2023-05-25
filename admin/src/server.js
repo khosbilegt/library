@@ -30,7 +30,6 @@ app.get('/auth/login/:email', (req, res) => {
 })
 
 app.get('/books', (req, res) => {
-     console.log("received request");
      const response = [];
      filenames = fs.readdirSync('/Users/xocoo/Desktop/Projects/library/admin/res/books/');
      filenames.forEach(file => {
@@ -38,6 +37,15 @@ app.get('/books', (req, res) => {
           response.push(content);
      });
      res.send(response);
+})
+
+app.delete('/books/:filename', (req, res) => {
+     fs.unlink(`/Users/xocoo/Desktop/Projects/library/admin/res/books/${req.params.filename}`, (err) => {
+          if (err) {
+              throw err;
+          }
+          res.send("Success");
+      });
 })
 
 app.post('/books/rent', jsonParser, (req, res) => {
@@ -59,6 +67,16 @@ app.post('/books/rent', jsonParser, (req, res) => {
 
 })
 
+app.post('/books/add', jsonParser, (req, res) => {
+     console.log('Received Body:', req.body);
+
+     fs.writeFile(`/Users/xocoo/Desktop/Projects/library/admin/res/books/${req.body.filename}.json`, JSON.stringify(req.body), err => {
+          if (err) {
+            console.error(err);
+          }
+     });
+})
+
 app.post('/auth/register', jsonParser, (req, res) => {
      console.log('Received Body:', req.body);
 
@@ -73,7 +91,6 @@ app.post('/auth/register', jsonParser, (req, res) => {
             console.error(err);
           }
      });
-
 })
 
 app.listen(port, () => {

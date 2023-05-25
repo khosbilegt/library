@@ -26,6 +26,7 @@ function Card(props) {
       const email = localStorage.getItem('user');
       postRent(email, book.filename);
     }
+    window.location = 'http://localhost:3000/home';
   }
 
   return (
