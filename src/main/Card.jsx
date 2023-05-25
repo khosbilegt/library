@@ -1,18 +1,31 @@
 import React, { useEffect, useState } from 'react';
 import { Book } from './';
+import { postRent } from './infoHandler';
 
 function Card(props) {
   const [book, setBook] = useState(Book.createDefault());
+  const [isRented, setIsRented] = useState(false);
 
   useEffect(() => {
     document.title = "Нүүр хуудас";
     setBook(Book.fromJson(props.content));
-    var getValue = localStorage.getItem("thisIndex");
   }, []);
 
+  useEffect(() => {
+    const arr = props.user.rented;
+    for(var i = 0; i < arr.length; i++) {
+      if(book.filename === arr[i]) {
+        setIsRented(true);
+      }
+      console.log(book.filename);
+    }
+  }, book)
+
   const rentBook = () => {
-    const items = JSON.parse(localStorage.getItem('items'));
-    console.log(items);
+    if(!isRented) {
+      const email = localStorage.getItem('user');
+      postRent(email, book.filename);
+    }
   }
 
   return (
@@ -31,7 +44,7 @@ function Card(props) {
           })}
         </div>
         <p className='text-sm'>{book.synopsis}</p>
-        <button className='mt-5 p-2 text-sm bg-blue-600 rounded-md text-white' onClick={rentBook}>Түрээслэх</button>
+        <button className='mt-5 p-2 text-sm bg-blue-600 rounded-md text-white' onClick={rentBook}>{isRented ? "Түрээсэлсэн" : "Түрээслэх"}</button>
       </div>
     </div>
   )

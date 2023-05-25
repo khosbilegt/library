@@ -19,6 +19,25 @@ async function getBooks() {
      }
 }
 
+async function postRent(email, book) {
+     try {
+          axios.post(`${baseUrl}/books/rent`, {
+               email: email,
+               book: book
+             })
+             .then(function (response) {
+               console.log(response);
+             })
+             .catch(function (error) {
+               console.log(error);
+             });
+     } catch(e) {
+          console.error('Failure!');
+          console.error(e.response.status);
+     }
+}
+
 export {
-     getBooks
+     getBooks,
+     postRent
 }

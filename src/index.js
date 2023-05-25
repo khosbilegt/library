@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import App from './App';
 import { Login, Register } from './auth';
 import { Home } from './main';
+import { AdminHome } from './admin';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -17,6 +18,10 @@ root.render(
 
         <Route path="/home">
           <Route index element={<Home />}/>
+        </Route>
+
+        <Route path="/admin">
+          <Route index element={<AdminHome />}/>
         </Route>
 
         <Route path="/auth">

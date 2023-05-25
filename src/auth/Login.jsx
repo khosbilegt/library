@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { getLogin } from './authHandler';
+import { getUser } from './authHandler';
 
 function Login() {
      const [email, setEmail] = useState("");
@@ -12,7 +12,7 @@ function Login() {
 
      const login = async (e) => {
           e.preventDefault();
-          var info = await getLogin(email);
+          var info = await getUser(email);
           if(info.password === password) {
                localStorage.setItem('user', info.email);
                window.location = 'http://localhost:3000/home';

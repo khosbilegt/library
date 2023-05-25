@@ -1,11 +1,12 @@
 class Book {
-     constructor(name, img, authors, synopsis, genres, date) {
+     constructor(name, img, authors, synopsis, genres, date, filename) {
           this.name = name;
           this.img = img;
           this.authors = authors;
           this.synopsis = synopsis;
           this.genres = genres;
           this.date = date;
+          this.filename = filename;
      }
 
      static fromJson(json) {
@@ -16,7 +17,8 @@ class Book {
                contents.authors, 
                contents.synopsis, 
                contents.genres, 
-               contents.date
+               contents.date,
+               contents.filename
           );
      }
 
@@ -28,6 +30,7 @@ class Book {
           "Loading",
           ["Loading"],
           "Loading",
+          "Loading"
           );
      }
 }

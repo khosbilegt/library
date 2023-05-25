@@ -40,12 +40,35 @@ app.get('/books', (req, res) => {
      res.send(response);
 })
 
+app.post('/books/rent', jsonParser, (req, res) => {
+     console.log('Received Body:', req.body);
+
+     var parsedEmail = parseEmail(req.body.email);
+
+     const content = fs.readFileSync(`/Users/xocoo/Desktop/Projects/library/admin/res/users/${parsedEmail}.json`, 'utf8');
+     console.log(content);
+     
+     const jsonObject = JSON.parse(content);
+     jsonObject["rented"].push(req.body.book);
+
+     fs.writeFile(`/Users/xocoo/Desktop/Projects/library/admin/res/users/${parsedEmail}.json`, JSON.stringify(jsonObject), err => {
+          if (err) {
+            console.error(err);
+          }
+     });
+
+})
+
 app.post('/auth/register', jsonParser, (req, res) => {
      console.log('Received Body:', req.body);
 
      var parsedEmail = parseEmail(req.body.email);
 
-     fs.writeFile(`/Users/xocoo/Desktop/Projects/library/admin/res/users/${parsedEmail}.json`, JSON.stringify(req.body), err => {
+     const jsonObject = req.body;
+     jsonObject["rented"] = [];
+     jsonObject["isAdmin"] = false;
+
+     fs.writeFile(`/Users/xocoo/Desktop/Projects/library/admin/res/users/${parsedEmail}.json`, JSON.stringify(jsonObject), err => {
           if (err) {
             console.error(err);
           }

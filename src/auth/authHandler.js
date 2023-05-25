@@ -20,7 +20,7 @@ async function postRegister(email, password) {
      }
 }
 
-async function getLogin(email) {
+async function getUser(email) {
      try {
           return axios.get(`${baseUrl}/auth/login/${email}`)
              .then((response) => {
@@ -39,5 +39,5 @@ async function getLogin(email) {
 
 export {
      postRegister,
-     getLogin
+     getUser
 }
