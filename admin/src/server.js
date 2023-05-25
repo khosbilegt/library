@@ -12,7 +12,6 @@ const parseEmail = (email) => {
      return arr[0];
 }
 
-
 app.use(cors({
      origin: 'http://localhost:3000'
 }));
@@ -28,6 +27,17 @@ app.get('/auth/login/:email', (req, res) => {
      });
      
      //res.send(content);
+})
+
+app.get('/books', (req, res) => {
+     console.log("received request");
+     const response = [];
+     filenames = fs.readdirSync('/Users/xocoo/Desktop/Projects/library/admin/res/books/');
+     filenames.forEach(file => {
+          const content = fs.readFileSync(`/Users/xocoo/Desktop/Projects/library/admin/res/books/${file}`, 'utf8');
+          response.push(content);
+     });
+     res.send(response);
 })
 
 app.post('/auth/register', jsonParser, (req, res) => {

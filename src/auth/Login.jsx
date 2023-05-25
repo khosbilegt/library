@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { getLogin } from './authHandler';
 
 function Login() {
-
      const [email, setEmail] = useState("");
      const [password, setPassword] = useState("");
 
@@ -15,6 +14,7 @@ function Login() {
           e.preventDefault();
           var info = await getLogin(email);
           if(info.password === password) {
+               localStorage.setItem('user', info.email);
                window.location = 'http://localhost:3000/home';
           }
      }

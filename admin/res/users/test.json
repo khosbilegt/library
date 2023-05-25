@@ -1,1 +1,7 @@
-{"email":"test@gmail.com","password":"test123"}
+{
+     "email":"test@gmail.com",
+     "password":"test123",
+     "rented": [
+          
+     ]
+}
